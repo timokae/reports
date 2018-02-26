@@ -1,0 +1,38 @@
+<div class="container">
+  <h2><%= @project.name %></h2>
+  <div class="row">
+    <div class="col">
+      <p><%= @project.description %></p>
+    </div>
+
+    <div class="col">
+      <%= render "report_form" %>
+    </div>
+  </div>
+</div>
+
+<div class="container overview">
+
+  <% @project.reports.each do |report| %>
+    <div class="card" style="spacing">
+      <div class="card-block" style="padding: 10px 20px;">
+        <h4 class="card-title"><%= report.title %></h4>
+        <p class="card-text"><%= report.description %></p>
+      </div>
+
+      <div class="card-footer">
+        <% if report.status == "draft" %>
+          <span class="badge badge-warning"><%= report.status %></span>
+        <% elsif report.status == "ready" %>
+          <span class="badge badge-primary"><%= report.status %></span>
+        <% else %>
+          <span class="badge badge-success"><%= report.status %></span>
+        <% end %>
+        <p>by <%= report.coworker.name %></p>
+        <%= link_to "Delete", project_report_path(@project, report), data: {:confirm => "Seriously?!"}, method: :delete %>
+        <%= link_to "Edit", edit_project_report_path(@project, report), {:class => "card-link"} %>
+      </div>
+    </div>
+  <% end %>
+
+</div>

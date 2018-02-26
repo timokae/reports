@@ -1,0 +1,24 @@
+<div class="container">
+  <%= form_for [@project, @report] do |f| %>
+      <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :coworker %>
+        <%= f.collection_select :coworker_id, @project.coworkers, :id, :name, {}, {:class => "form-control form-control-sm"} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status %>
+        <%= f.select :status, Report.statuses.keys, {}, {:class => "form-control form-control-sm"} %>
+      </div>
+      <div class="form-group">
+        <%= link_to "Cancel", project_path(@project[:id]), :class => "btn btn-danger" %>
+        <%= f.submit :class => "btn btn-success"%>
+      </div>
+  <% end %>
+</div>

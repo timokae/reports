@@ -1,0 +1,19 @@
+<ul class="nav">
+  <li class="nav-item">
+    <%= link_to "Create new Coworker", new_coworker_path, :class => "nav-link" %>
+  </li>
+</ul>
+
+<div class="container overview">
+  <% @coworkers.each do |coworker| %>
+    <div class="card spacing">
+      <div class="card-body">
+        <h5><%= coworker.name %></h3>
+        <hr>
+        <p><%= coworker.email %></p>
+        <%= link_to "Edit", edit_coworker_path(coworker) %>
+        <%= link_to "Delete", coworker_path(coworker), method: "delete", data: { confirm: "Seriously?!" } %>
+      </div>
+    </div>
+  <% end %>
+</div>
